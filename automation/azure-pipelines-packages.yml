@@ -16,19 +16,12 @@ steps:
     script: '"C:\Program Files\nodejs\npm.cmd" --version'
   displayName: Installing Node 10
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      (Get-Content $(build_cake)) -replace "MSBuildToolVersion.VS201\d{1,3}", '$(agent_buildTools)' | Set-Content $(build_cake)
-  displayName: Config preparation
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Output "Envs: "
-      Get-Content $(build_cake)
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       (Get-Content $(build_cake)) -replace "MSBuildToolVersion.VS201\d{1,3}", '$(agent_buildTools)' | Set-Content $(build_cake)
+#   displayName: Config preparation
 
 - task: NuGetAuthenticate@0
   displayName: 'NuGet Authenticate'
