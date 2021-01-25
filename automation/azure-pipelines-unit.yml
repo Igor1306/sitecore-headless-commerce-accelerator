@@ -27,17 +27,17 @@ steps:
   displayName: Download node modules
   inputs:
     buildType: 'specific'
-    project: 'c8a112df-eb95-41fa-bb80-48e83128fe75'
+    project: 'c95178d1-e55f-4a4c-aa6b-bf2fad890762'
     definition: '10'
     buildVersionToDownload: 'latest'
     artifactName: 'node_modules'
     targetPath: '$(Pipeline.Workspace)/s/src/node_modules'
-
+  
 - task: DownloadPipelineArtifact@2
   displayName: Download client node modules
   inputs:
     buildType: 'specific'
-    project: 'c8a112df-eb95-41fa-bb80-48e83128fe75'
+    project: 'c95178d1-e55f-4a4c-aa6b-bf2fad890762'
     definition: '10'
     buildVersionToDownload: 'latest'
     artifactName: 'client_node_modules'
@@ -47,7 +47,7 @@ steps:
   displayName: Download NuGet packages
   inputs:
     buildType: 'specific'
-    project: 'c8a112df-eb95-41fa-bb80-48e83128fe75'
+    project: 'c95178d1-e55f-4a4c-aa6b-bf2fad890762'
     definition: '10'
     buildVersionToDownload: 'latest'
     artifactName: 'packages'
@@ -57,7 +57,7 @@ steps:
   displayName: Download tools
   inputs:
     buildType: 'specific'
-    project: 'c8a112df-eb95-41fa-bb80-48e83128fe75'
+    project: 'c95178d1-e55f-4a4c-aa6b-bf2fad890762'
     definition: '10'
     buildVersionToDownload: 'latest'
     artifactName: 'tools'
