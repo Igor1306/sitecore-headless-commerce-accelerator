@@ -28,8 +28,7 @@ steps:
     targetType: 'inline'
     script: |
       Write-Output "Envs: "
-      Write-Output $(build_cake)
-      Write-Output $(agent_buildTools)
+      Get-Content $(build_cake)
 
 - task: NuGetAuthenticate@0
   displayName: 'NuGet Authenticate'
