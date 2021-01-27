@@ -7,7 +7,7 @@ pool:
 
 jobs:
   - job: Build_and_test
-    dependsOn: Set_build_version
+    # dependsOn: Set_build_version
 
     variables:
       build_cake: './src/build.cake'
