@@ -138,12 +138,12 @@ jobs:
         configuration: 'Debug'
         msbuildArguments: '/t:Rebuild'
 
-    - task: PowerShell@2
-      displayName: Run Unit tests
-      inputs:
-        filePath: './src/build.ps1'
-        arguments: '-Target 003-Tests'
-        workingDirectory: './src/'
+    # - task: PowerShell@2
+    #   displayName: Run Unit tests
+    #   inputs:
+    #     filePath: './src/build.ps1'
+    #     arguments: '-Target 003-Tests'
+    #     workingDirectory: './src/'
 
     - task: PublishCodeCoverageResults@1
       displayName: Publish code coverage
@@ -175,67 +175,67 @@ jobs:
         configuration: 'Debug'
         msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
 
-    # - task: PowerShell@2
-    #   displayName: Collect files for artifacts
-    #   env:
-    #     Workspace: $(Pipeline.Workspace)
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       robocopy $(Pipeline.Workspace)/s/src/configs/Sitecore/ $(Pipeline.Workspace)/s/output/ web.config
-    #       robocopy $(Pipeline.Workspace)/s/src/tools/cake.sitecore/Cake.Sitecore/tools/unicorn $(Pipeline.Workspace)/s/output/unicorn-sync /s
-    #       ./automation/Get-Artifacts.ps1 Feature
-    #       ./automation/Get-Artifacts.ps1 Foundation
-    #       ./automation/Get-Artifacts.ps1 Project
-    #       robocopy $(Pipeline.Workspace)/s/src/client/src/Project/$(project_name)/build $(Pipeline.Workspace)/s/output/Project/dist/$(project_name)/Project/$(project_name) /s
-    #     errorActionPreference: 'continue'
-    #     ignoreLASTEXITCODE: true
+    - task: PowerShell@2
+      displayName: Collect files for artifacts
+      env:
+        Workspace: $(Pipeline.Workspace)
+      inputs:
+        targetType: 'inline'
+        script: |
+          robocopy $(Pipeline.Workspace)/s/src/configs/Sitecore/ $(Pipeline.Workspace)/s/output/ web.config
+          robocopy $(Pipeline.Workspace)/s/src/tools/cake.sitecore/Cake.Sitecore/tools/unicorn $(Pipeline.Workspace)/s/output/unicorn-sync /s
+          ./automation/Get-Artifacts.ps1 Feature
+          ./automation/Get-Artifacts.ps1 Foundation
+          ./automation/Get-Artifacts.ps1 Project
+          robocopy $(Pipeline.Workspace)/s/src/client/src/Project/$(project_name)/build $(Pipeline.Workspace)/s/output/Project/dist/$(project_name)/Project/$(project_name) /s
+        errorActionPreference: 'continue'
+        ignoreLASTEXITCODE: true
 
-    # - task: PowerShell@2
-    #   displayName: Change default parameters for $(project_name)
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       (Get-Content $(project_site_config)) -replace 'hostName=$(quotes_regexp)', 'hostName="$(sitecore_hostname)"' | Set-Content $(project_site_config)
-    #       (Get-Content $(foundation_commerce_config)) -replace '<server>.*</server>', '<server>$(smtp_server)</server>' -replace '<userName>.*</userName>', '<userName>$(smtp_username)</userName>' -replace '<password>.*</password>', '<password>$(smtp_password)</password>' | Set-Content $(foundation_commerce_config)
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish web config
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/web.config'
-    #     artifact: 'web_config'
-    #     publishLocation: 'pipeline'
+    - task: PowerShell@2
+      displayName: Change default parameters for $(project_name)
+      inputs:
+        targetType: 'inline'
+        script: |
+          (Get-Content $(project_site_config)) -replace 'hostName=$(quotes_regexp)', 'hostName="$(sitecore_hostname)"' | Set-Content $(project_site_config)
+          (Get-Content $(foundation_commerce_config)) -replace '<server>.*</server>', '<server>$(smtp_server)</server>' -replace '<userName>.*</userName>', '<userName>$(smtp_username)</userName>' -replace '<password>.*</password>', '<password>$(smtp_password)</password>' | Set-Content $(foundation_commerce_config)
+    - task: PublishPipelineArtifact@1
+      displayName: Publish web config
+      inputs:
+        targetPath: '$(artifacts_location)/web.config'
+        artifact: 'web_config'
+        publishLocation: 'pipeline'
 
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish unicorn
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/unicorn'
-    #     artifact: 'unicorn'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish unicorn
+      inputs:
+        targetPath: '$(artifacts_location)/unicorn'
+        artifact: 'unicorn'
+        publishLocation: 'pipeline'
 
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish Feature 
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/Feature'
-    #     artifact: 'Feature'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Feature 
+      inputs:
+        targetPath: '$(artifacts_location)/Feature'
+        artifact: 'Feature'
+        publishLocation: 'pipeline'
 
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish Foundation 
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/Foundation'
-    #     artifact: 'Foundation'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Foundation 
+      inputs:
+        targetPath: '$(artifacts_location)/Foundation'
+        artifact: 'Foundation'
+        publishLocation: 'pipeline'
 
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish Project 
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/Project'
-    #     artifact: 'Project'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Project 
+      inputs:
+        targetPath: '$(artifacts_location)/Project'
+        artifact: 'Project'
+        publishLocation: 'pipeline'
 
-    # - task: PublishPipelineArtifact@1
-    #   displayName: Publish unicorn sync tool 
-    #   inputs:
-    #     targetPath: '$(artifacts_location)/unicorn-sync'
-    #     artifact: 'unicorn-sync'
-    #     publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish unicorn sync tool 
+      inputs:
+        targetPath: '$(artifacts_location)/unicorn-sync'
+        artifact: 'unicorn-sync'
+        publishLocation: 'pipeline'
