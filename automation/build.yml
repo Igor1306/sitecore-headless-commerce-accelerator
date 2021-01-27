@@ -191,13 +191,13 @@ jobs:
         errorActionPreference: 'continue'
         ignoreLASTEXITCODE: true
 
-    - task: PowerShell@2
-      displayName: Change default parameters for $(project_name)
-      inputs:
-        targetType: 'inline'
-        script: |
-          (Get-Content $(project_site_config)) -replace 'hostName=$(quotes_regexp)', 'hostName="$(sitecore_hostname)"' | Set-Content $(project_site_config)
-          (Get-Content $(foundation_commerce_config)) -replace '<server>.*</server>', '<server>$(smtp_server)</server>' -replace '<userName>.*</userName>', '<userName>$(smtp_username)</userName>' -replace '<password>.*</password>', '<password>$(smtp_password)</password>' | Set-Content $(foundation_commerce_config)
+    # - task: PowerShell@2
+    #   displayName: Change default parameters for $(project_name)
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       (Get-Content $(project_site_config)) -replace 'hostName=$(quotes_regexp)', 'hostName="$(sitecore_hostname)"' | Set-Content $(project_site_config)
+    #       (Get-Content $(foundation_commerce_config)) -replace '<server>.*</server>', '<server>$(smtp_server)</server>' -replace '<userName>.*</userName>', '<userName>$(smtp_username)</userName>' -replace '<password>.*</password>', '<password>$(smtp_password)</password>' | Set-Content $(foundation_commerce_config)
     - task: PublishPipelineArtifact@1
       displayName: Publish web config
       inputs:
