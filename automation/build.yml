@@ -130,50 +130,50 @@ jobs:
       inputs:
         restoreSolution: '$(Pipeline.Workspace)/s/src/HCA.sln'
 
-    # - task: MSBuild@1
-    #   displayName: MSBuild
-    #   inputs:
-    #     solution: './src/HCA.sln'
-    #     msbuildVersion: '15.0'
-    #     configuration: 'Debug'
-    #     msbuildArguments: '/t:Rebuild'
+    - task: MSBuild@1
+      displayName: MSBuild
+      inputs:
+        solution: './src/HCA.sln'
+        msbuildVersion: '15.0'
+        configuration: 'Debug'
+        msbuildArguments: '/t:Rebuild'
 
-    # - task: PowerShell@2
-    #   displayName: Run Unit tests
-    #   inputs:
-    #     filePath: './src/build.ps1'
-    #     arguments: '-Target 003-Tests'
-    #     workingDirectory: './src/'
+    - task: PowerShell@2
+      displayName: Run Unit tests
+      inputs:
+        filePath: './src/build.ps1'
+        arguments: '-Target 003-Tests'
+        workingDirectory: './src/'
 
-    # - task: PublishCodeCoverageResults@1
-    #   displayName: Publish code coverage
-    #   inputs:
-    #     codeCoverageTool: 'Cobertura'
-    #     summaryFileLocation: '$(Pipeline.Workspace)/s/output/tests/coverage/cobertura-coverage.xml'
+    - task: PublishCodeCoverageResults@1
+      displayName: Publish code coverage
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(Pipeline.Workspace)/s/output/tests/coverage/cobertura-coverage.xml'
 
-    # - task: MSBuild@1
-    #   displayName: MSBuild Foundation
-    #   inputs:
-    #     solution: './src/Foundation/**/*.csproj'
-    #     msbuildVersion: '15.0'
-    #     configuration: 'Debug'
-    #     msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
+    - task: MSBuild@1
+      displayName: MSBuild Foundation
+      inputs:
+        solution: './src/Foundation/**/*.csproj'
+        msbuildVersion: '15.0'
+        configuration: 'Debug'
+        msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
 
-    # - task: MSBuild@1
-    #   displayName: MSBuild Feature
-    #   inputs:
-    #     solution: './src/Feature/**/*.csproj'
-    #     msbuildVersion: '15.0'
-    #     configuration: 'Debug'
-    #     msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
+    - task: MSBuild@1
+      displayName: MSBuild Feature
+      inputs:
+        solution: './src/Feature/**/*.csproj'
+        msbuildVersion: '15.0'
+        configuration: 'Debug'
+        msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
 
-    # - task: MSBuild@1
-    #   displayName: MSBuild Project
-    #   inputs:
-    #     solution: './src/Project/**/*.csproj'
-    #     msbuildVersion: '15.0'
-    #     configuration: 'Debug'
-    #     msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
+    - task: MSBuild@1
+      displayName: MSBuild Project
+      inputs:
+        solution: './src/Project/**/*.csproj'
+        msbuildVersion: '15.0'
+        configuration: 'Debug'
+        msbuildArguments: '/t:Build /p:Verbosity=Minimal /p:DeployOnBuild=True'
 
     # - task: PowerShell@2
     #   displayName: Collect files for artifacts
