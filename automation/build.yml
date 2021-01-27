@@ -66,29 +66,29 @@ jobs:
         artifactName: 'tools'
         targetPath: '$(Pipeline.Workspace)/s/src/tools'
 
-    # - task: PowerShell@2
-    #   displayName: Config preparation
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       Move-Item $(license_file.secureFilePath) ./src/ -Force
-    # - task: FileTransform@2
-    #   displayName: Transform web.config
-    #   inputs:
-    #     folderPath: '$(System.DefaultWorkingDirectory)/src/configs/Sitecore/'
-    #     xmlTransformationRules: '-transform **\*.config.$(environment_type).transform -xml **\*.config'
+    - task: PowerShell@2
+      displayName: Config preparation
+      inputs:
+        targetType: 'inline'
+        script: |
+          Move-Item $(license_file.secureFilePath) ./src/ -Force
+    - task: FileTransform@2
+      displayName: Transform web.config
+      inputs:
+        folderPath: '$(System.DefaultWorkingDirectory)/src/configs/Sitecore/'
+        xmlTransformationRules: '-transform **\*.config.$(environment_type).transform -xml **\*.config'
 
-    # - task: PowerShell@2
-    #   displayName: Add appSettigns section for transform
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       (Get-Content $(transform_variables_file)) -replace "<configuration>", "<configuration>`n<appSettings>" -replace '</configuration>', "</appSettings>`n</configuration>" | Set-Content $(transform_variables_file)
-    # - task: FileTransform@2
-    #   displayName: Fill config with variables via transform
-    #   inputs:
-    #     folderPath: '$(project_config_folder)'
-    #     xmlTargetFiles: '$(transform_variables_file)'
+    - task: PowerShell@2
+      displayName: Add appSettigns section for transform
+      inputs:
+        targetType: 'inline'
+        script: |
+          (Get-Content $(transform_variables_file)) -replace "<configuration>", "<configuration>`n<appSettings>" -replace '</configuration>', "</appSettings>`n</configuration>" | Set-Content $(transform_variables_file)
+    - task: FileTransform@2
+      displayName: Fill config with variables via transform
+      inputs:
+        folderPath: '$(project_config_folder)'
+        xmlTargetFiles: '$(transform_variables_file)'
 
     # - task: PowerShell@2
     #   displayName: Remove appSettigns section after transform
