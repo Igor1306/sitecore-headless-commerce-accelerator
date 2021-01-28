@@ -145,11 +145,11 @@ jobs:
     #     arguments: '-Target 003-Tests'
     #     workingDirectory: './src/'
 
-    - task: PublishCodeCoverageResults@1
-      displayName: Publish code coverage
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '$(Pipeline.Workspace)/s/output/tests/coverage/cobertura-coverage.xml'
+    # - task: PublishCodeCoverageResults@1
+    #   displayName: Publish code coverage
+    #   inputs:
+    #     codeCoverageTool: 'Cobertura'
+    #     summaryFileLocation: '$(Pipeline.Workspace)/s/output/tests/coverage/cobertura-coverage.xml'
 
     - task: MSBuild@1
       displayName: MSBuild Foundation
